@@ -1,0 +1,18 @@
+# Ignorar datos pesados
+data/raw/*.csv
+data/processed/*.csv
+data/processed/modelo_*
+
+# Ignorar archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos de sistema y configuraciones locales
+.DS_Store
+.vscode/
+.env
+hadoop.env
+
+# Ignorar checkpoints de Jupyter
+.ipynb_checkpoints/
+

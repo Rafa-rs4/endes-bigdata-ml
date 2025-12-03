@@ -1,0 +1,41 @@
+version: '3'
+services:
+  # --- 1. HADOOP NAMENODE (El Maestro de HDFS) ---
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=test
+    env_file:
+      - ./hadoop.env
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+
+  # --- 2. HADOOP DATANODE (El Esclavo de HDFS) ---
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    environment:
+      - SERVICE_PRECONDITION=namenode:9000
+    env_file:
+      - ./hadoop.env
+    depends_on:
+      - namenode
+
+  # --- 3. TU ENTORNO DE SPARK (Donde corren tus scripts) ---
+  spark-app:
+    build: .
+    container_name: endes_ml_container
+    ports:  
+      - "8888:8888"
+      - "4040:4040"
+      - "8000:8000"
+    volumes:
+      - ./:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    links:
+      - namenode
+      - datanode
+    command: start-notebook.sh --NotebookApp.token=''

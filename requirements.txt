@@ -1,0 +1,9 @@
+matplotlib
+seaborn
+pandas
+numpy
+scikit-learn
+shap
+fastapi
+uvicorn
+pydantic
