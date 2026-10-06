@@ -1,4 +1,4 @@
-# 🧠 ENDES Big Data & Machine Learning
+# ENDES Big Data & Machine Learning
 
 Modelos predictivos construidos sobre los microdatos de la **Encuesta Demográfica y de Salud Familiar (ENDES – INEI)** para identificar **riesgo en el embarazo** y **violencia familiar**. El proyecto cubre el flujo completo: ETL distribuido con **PySpark**, entrenamiento y evaluación de modelos y una **API REST** para hacer predicciones.
 
@@ -9,14 +9,14 @@ Modelos predictivos construidos sobre los microdatos de la **Encuesta Demográfi
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white)
 
-## 🎯 Objetivos
+## Objetivos
 
 | Modelo | Variable objetivo | Fuentes ENDES |
 |:--|:--|:--|
 | **Riesgo en el embarazo** | Controles prenatales insuficientes (< 4) o parto fuera de un establecimiento de salud | REC41, REC94, RE516171 |
 | **Violencia familiar** | Presencia de violencia doméstica reportada | REC84DV, RE516171 |
 
-## ⚙️ Flujo del proyecto
+## Flujo del proyecto
 
 ```
 data/raw (CSV ENDES)
@@ -34,7 +34,7 @@ outputs/                   →  matrices de confusión, curvas ROC y tabla de re
 src/api.py                 →  API REST (FastAPI) que sirve los modelos entrenados
 ```
 
-## 📁 Estructura
+## Estructura
 
 ```
 endes-bigdata-ml/
@@ -51,7 +51,7 @@ endes-bigdata-ml/
 └── requirements.txt
 ```
 
-## 🚀 Cómo ejecutarlo
+## Cómo ejecutarlo
 
 > Los datos crudos de ENDES no se incluyen en el repositorio. Descárgalos del portal de microdatos del INEI y colócalos en `data/raw/`.
 
@@ -71,7 +71,7 @@ docker exec -it endes_ml_container spark-submit src/api.py
 - Spark UI: http://localhost:4040
 - Documentación de la API: http://localhost:8000/docs
 
-## 📊 Resultados
+## Resultados
 
 Ejemplos de evaluación (Random Forest):
 
@@ -81,6 +81,6 @@ Ejemplos de evaluación (Random Forest):
 
 Todas las matrices de confusión y curvas ROC están en [`outputs/figures`](outputs/figures).
 
-## 👤 Autor
+## Autor
 
 **Rafael Roncal Saravia**: [LinkedIn](https://www.linkedin.com/in/rafael-roncal-saravia) · [GitHub](https://github.com/Rafa-rs4)
