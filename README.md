@@ -28,7 +28,7 @@ src/etl_procesamiento.py   →  limpieza, normalización de IDs y cruce de módu
 src/train_modelos.py       →  balanceo de clases, entrenamiento y evaluación
    │                           (Regresión Logística · Random Forest · Gradient Boosting)
    ▼
-outputs/                   →  matrices de confusión, curvas ROC y tabla de resultados
+outputs/                   →  matrices de confusión y curvas ROC
    │
    ▼
 src/api.py                 →  API REST (FastAPI) que sirve los modelos entrenados
@@ -44,10 +44,10 @@ endes-bigdata-ml/
 │   ├── train_modelos.py
 │   └── api.py
 ├── outputs/
-│   ├── figures/          # Matrices de confusión y curvas ROC por modelo
-│   └── tables/
+│   └── figures/          # Matrices de confusión y curvas ROC por modelo
 ├── Dockerfile            # Imagen jupyter/pyspark-notebook + dependencias
 ├── docker-compose.yml    # Hadoop (namenode + datanode) + entorno Spark
+├── hadoop.env.example    # Configuración base de Hadoop
 └── requirements.txt
 ```
 
@@ -56,14 +56,17 @@ endes-bigdata-ml/
 > Los datos crudos de ENDES no se incluyen en el repositorio. Descárgalos del portal de microdatos del INEI y colócalos en `data/raw/`.
 
 ```bash
-# 1. Levantar el entorno (Hadoop + Spark + Jupyter)
+# 1. Crear el archivo de configuración de Hadoop
+cp hadoop.env.example hadoop.env
+
+# 2. Levantar el entorno (Hadoop + Spark + Jupyter)
 docker compose up -d --build
 
-# 2. Ejecutar el ETL y el entrenamiento dentro del contenedor
+# 3. Ejecutar el ETL y el entrenamiento dentro del contenedor
 docker exec -it endes_ml_container spark-submit src/etl_procesamiento.py
 docker exec -it endes_ml_container spark-submit src/train_modelos.py
 
-# 3. Iniciar la API
+# 4. Iniciar la API
 docker exec -it endes_ml_container spark-submit src/api.py
 ```
 
